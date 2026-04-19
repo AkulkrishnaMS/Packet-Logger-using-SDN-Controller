@@ -93,7 +93,7 @@ ryu-manager packet_logger.py
 
 **Terminal 2 — Start the Mininet topology (requires sudo):**
 ```bash
-sudo python topology.py
+sudo python3 topology.py
 ```
 
 
@@ -115,26 +115,24 @@ mininet> h1 ping -c 4 h3
 ```
 Expected: 100% packet loss, "BLOCKED" status in packet table, alert logged.
 
-### Scenario C — Throughput test (iperf)
-```
-mininet> iperf h1 h2
-```
-Expected: ~9-10 Mbps (link set to 10 Mbps), result shown in Mininet CLI.
 
-### Scenario D — View flow table
+
+### Scenario C — View flow table
 ```
-mininet> sh ovs-ofctl dump-flows s1
+mininet> sh ovs-ofctl -O OpenFlow13 dump-flows s1
+
 ```
 Expected: table-miss rule + learned unicast forwarding rules.
 
-### Scenario E — Port statistics
+### Scenario D — Port statistics
 ```
-mininet> sh ovs-ofctl dump-ports s1
+mininet>sh ovs-ofctl -O OpenFlow13 dump-ports s1
+
 ```
 Expected: per-port rx/tx packet counts.
 
 ---
-### Scenario F — UDP Traffic Test (Deep Packet Inspection)
+### Scenario E — UDP Traffic Test (Deep Packet Inspection)
 '''
 mininet> xterm h1 h2
 
